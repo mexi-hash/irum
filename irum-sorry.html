@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Irum - My Apology Journey ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Playfair+Display:wght@700&family=Great+Vibes&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0c1d;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Music Toggle */
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .music-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Initial Screen */
+        .initial-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #2a0845 0%, #0f0c1d 70%);
+            z-index: 10;
+            transition: opacity 1.5s ease;
+        }
+
+        .hearts-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d8d;
+            font-size: 24px;
+            opacity: 0;
+            animation: floatUp 8s linear infinite;
+        }
+
+        .begin-btn {
+            background: linear-gradient(45deg, #ff4d8d, #ff2e63);
+            color: white;
+            border: none;
+            padding: 25px 60px;
+            font-size: 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Pacifico', cursive;
+            box-shadow: 0 15px 35px rgba(255, 77, 141, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .begin-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 77, 141, 0.6);
+        }
+
+        .begin-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .begin-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Apology Journey - Page 1 */
+        .apology-journey {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a0b2e 0%, #3d1b63 50%, #2a0845 100%);
+            z-index: 9;
+            padding: 20px;
+        }
+
+        .emoji-animation {
+            font-size: 100px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 20px;
+            animation: gentleBow 3s infinite ease-in-out;
+        }
+
+        .apology-message {
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .apology-title {
+            font-family: 'Caveat', cursive;
+            font-size: 72px;
+            color: #ffccd5;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .apology-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            color: #ffb3c1;
+            margin-bottom: 30px;
+        }
+
+        .interactive-gift {
+            font-size: 80px;
+            cursor: pointer;
+            animation: pulseGlow 2s infinite;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .interactive-gift:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        .gift-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: #ffcc00;
+            opacity: 0.8;
+            font-family: 'Dancing Script', cursive;
+            white-space: nowrap;
+        }
+
+        /* Heartfelt Message - Page 2 */
+        .heartfelt-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #2a0845 0%, #6441a5 100%);
+            z-index: 8;
+            padding: 20px;
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .emotional-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 64px;
+            color: #ffcc00;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .forgiveness-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 56px;
+            color: #ff9999;
+            margin-bottom: 20px;
+        }
+
+        .love-letter {
+            position: absolute;
+            bottom: 100px;
+            width: 300px;
+            height: 400px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            transform: rotate(-5deg);
+            display: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .letter-content {
+            font-family: 'Caveat', cursive;
+            color: #333;
+            font-size: 24px;
+            line-height: 1.6;
+        }
+
+        /* Celebration - Page 3 */
+        .celebration-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff4d8d 0%, #ff2e63 30%, #6441a5 100%);
+            z-index: 7;
+            overflow: hidden;
+        }
+
+        .celebration-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .new-year-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 80px;
+            color: #ffcc00;
+            margin-bottom: 30px;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .endearment-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 60px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 48px;
+            color: #a3d9ff;
+            margin-top: 40px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: absolute;
+            bottom: 50px;
+            display: flex;
+            gap: 30px;
+            z-index: 5;
+        }
+
+        .timeline-dot {
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .timeline-dot.active {
+            background: #ffcc00;
+            box-shadow: 0 0 20px #ffcc00;
+            transform: scale(1.3);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Animations */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gentleBow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(-5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
+            }
+            50% { 
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8));
+            }
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Page Transitions */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #ff2e63;
+            z-index: 100;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .begin-btn {
+                padding: 20px 40px;
+                font-size: 26px;
+            }
+
+            .apology-title {
+                font-size: 48px;
+            }
+
+            .apology-subtitle {
+                font-size: 36px;
+            }
+
+            .emotional-text {
+                font-size: 48px;
+            }
+
+            .forgiveness-text {
+                font-size: 40px;
+            }
+
+            .new-year-text {
+                font-size: 56px;
+            }
+
+            .endearment-text {
+                font-size: 44px;
+            }
+
+            .emoji-animation {
+                font-size: 70px;
+            }
+
+            .message-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .begin-btn {
+                padding: 18px 30px;
+                font-size: 22px;
+            }
+
+            .apology-title {
+                font-size: 36px;
+            }
+
+            .emotional-text {
+                font-size: 36px;
+            }
+
+            .new-year-text {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-sad-times-579.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="celebration-sound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-happy-crowd-laugh-464.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="heartbeat-sound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-soft-758.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle -->
+    <div class="music-toggle" id="musicToggle">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition"></div>
+
+    <!-- Initial Screen -->
+    <div class="initial-screen" id="initialScreen">
+        <div class="hearts-bg" id="heartsBg"></div>
+        <button class="begin-btn" id="beginBtn">
+            Click Here Irum ❤️
+        </button>
+        <div class="timeline">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot"></div>
+        </div>
+    </div>
+
+    <!-- Apology Journey -->
+    <div class="apology-journey" id="apologyJourney">
+        <div class="emoji-animation">
+            <span>🥺</span>
+            <span>💔</span>
+            <span>🙏</span>
+        </div>
+        <div class="apology-message">
+            <h1 class="apology-title">Irum, I'm Sorry 💔</h1>
+            <h2 class="apology-subtitle">Sorry Begum ❤️</h2>
+        </div>
+        <div class="interactive-gift" id="firstGift">
+            🎁
+            <div class="gift-label">Tap to open my heart</div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot active"></div>
+            <div class="timeline-dot"></div>
+        </div>
+    </div>
+
+    <!-- Heartfelt Message -->
+    <div class="heartfelt-message" id="heartfeltMessage">
+        <div class="message-container">
+            <h1 class="emotional-text">SHOOOOOOORRYYYY JAAAAAAAN ❤️</h1>
+            <h2 class="forgiveness-text">Maaf krdein 🥺</h2>
+        </div>
+        <div class="interactive-gift" id="secondGift">
+            🎁
+            <div class="gift-label">Our new beginning</div>
+        </div>
+        <div class="love-letter" id="loveLetter">
+            <div class="letter-content">
+                My Dearest Irum,<br><br>
+                Every moment without your smile feels incomplete.<br>
+                I cherish our memories and promise to do better.<br>
+                You mean everything to me.<br><br>
+                Forever yours,<br>
+                Taimoor
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot active"></div>
+        </div>
+    </div>
+
+    <!-- Celebration Screen -->
+    <div class="celebration-screen" id="celebrationScreen">
+        <div class="celebration-content">
+            <h1 class="new-year-text">Happy New Year IRUM! 🎉</h1>
+            <h2 class="endearment-text">Begham ❤️</h2>
+            <div class="signature">Chota sa tohfa from Taimoor Saif 💖</div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-dot active"></div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const initialScreen = document.getElementById('initialScreen');
+        const apologyJourney = document.getElementById('apologyJourney');
+        const heartfeltMessage = document.getElementById('heartfeltMessage');
+        const celebrationScreen = document.getElementById('celebrationScreen');
+        const beginBtn = document.getElementById('beginBtn');
+        const firstGift = document.getElementById('firstGift');
+        const secondGift = document.getElementById('secondGift');
+        const loveLetter = document.getElementById('loveLetter');
+        const heartsBg = document.getElementById('heartsBg');
+        const pageTransition = document.getElementById('pageTransition');
+        const musicToggle = document.getElementById('musicToggle');
+        
+        // Audio Elements
+        const bgMusic = document.getElementById('bg-music');
+        const celebrationSound = document.getElementById('celebration-sound');
+        const clickSound = document.getElementById('click-sound');
+        const heartbeatSound = document.getElementById('heartbeat-sound');
+        
+        // State Variables
+        let currentPage = 1;
+        let musicPlaying = false;
+        
+        // Initialize floating hearts
+        function createFloatingHearts() {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+                heartsBg.appendChild(heart);
+            }
+        }
+        
+        // Create celebration confetti
+        function createConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'absolute';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.pointerEvents = 'none';
+            confettiContainer.style.zIndex = '1';
+            
+            celebrationScreen.appendChild(confettiContainer);
+            
+            const emojis = ['🎉', '✨', '🎊', '🌟', '❤️', '💖', '🥳', '🎈'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('floating-element');
+                confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.fontSize = (20 + Math.random() * 40) + 'px';
+                confetti.style.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
+                confetti.style.animation = `confettiFall ${3 + Math.random() * 4}s linear ${Math.random() * 2}s infinite`;
+                confettiContainer.appendChild(confetti);
+            }
+        }
+        
+        // Page transition animation
+        function transitionToNextPage(nextPageCallback) {
+            pageTransition.style.transform = 'scaleX(1)';
+            
+            setTimeout(() => {
+                nextPageCallback();
+                pageTransition.style.transform = 'scaleX(0)';
+                pageTransition.style.transformOrigin = 'right';
+            }, 800);
+            
+            setTimeout(() => {
+                pageTransition.style.transformOrigin = 'left';
+            }, 1600);
+        }
+        
+        // Update timeline dots
+        function updateTimeline(page) {
+            document.querySelectorAll('.timeline-dot').forEach((dot, index) => {
+                if (index === page - 1) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Play sound effect
+        function playSound(sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Audio play failed:", e));
+        }
+        
+        // Toggle background music
+        function toggleMusic() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music-slash"></i>';
+            } else {
+                bgMusic.play().catch(e => console.log("Music autoplay prevented"));
+                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            }
+            musicPlaying = !musicPlaying;
+        }
+        
+        // Event Listeners
+        beginBtn.addEventListener('click', () => {
+            playSound(clickSound);
+            transitionToNextPage(() => {
+                initialScreen.style.display = 'none';
+                apologyJourney.style.display = 'flex';
+                currentPage = 2;
+                updateTimeline(currentPage);
+                playSound(heartbeatSound);
+            });
+        });
+        
+        firstGift.addEventListener('click', () => {
+            playSound(clickSound);
+            transitionToNextPage(() => {
+                apologyJourney.style.display = 'none';
+                heartfeltMessage.style.display = 'flex';
+                currentPage = 3;
+                updateTimeline(currentPage);
+                
+                // Show love letter after a delay
+                setTimeout(() => {
+                    loveLetter.style.display = 'block';
+                    setTimeout(() => {
+                        loveLetter.style.display = 'none';
+                    }, 5000);
+                }, 1000);
+            });
+        });
+        
+        secondGift.addEventListener('click', () => {
+            playSound(clickSound);
+            playSound(celebrationSound);
+            transitionToNextPage(() => {
+                heartfeltMessage.style.display = 'none';
+                celebrationScreen.style.display = 'flex';
+                currentPage = 4;
+                updateTimeline(currentPage);
+                createConfetti();
+                
+                // Auto-play celebration music
+                if (!musicPlaying) {
+                    toggleMusic();
+                }
+            });
+        });
+        
+        musicToggle.addEventListener('click', toggleMusic);
+        
+        // Initialize
+        createFloatingHearts();
+        
+        // Try to auto-play music (with user interaction)
+        document.addEventListener('click', function initMusic() {
+            if (!musicPlaying) {
+                bgMusic.volume = 0.5;
+                bgMusic.play().then(() => {
+                    musicPlaying = true;
+                    musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+                }).catch(e => {
+                    console.log("Auto-play prevented. User must interact first.");
+                });
+            }
+            document.removeEventListener('click', initMusic);
+        });
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentPage === 1) beginBtn.click();
+                else if (currentPage === 2) firstGift.click();
+                else if (currentPage === 3) secondGift.click();
+            } else if (e.key === 'ArrowLeft') {
+                // Optional: Add back navigation
+            } else if (e.key === 'm') {
+                toggleMusic();
+            }
+        });
+        
+        // Add touch/swipe support for mobile
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            
+            // Swipe right to left (next)
+            if (diff > 50) {
+                if (currentPage === 1) beginBtn.click();
+                else if (currentPage === 2) firstGift.click();
+                else if (currentPage === 3) secondGift.click();
+            }
+        });
+    </script>
+</body>
+</html>
